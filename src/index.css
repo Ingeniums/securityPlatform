@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  background-image: url("/src/images/Background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+ 
+
+}
+@layer base {
+    @font-face {
+      font-family: 'GameofThrones';
+      src: url( '/src/fonts/GameofThrones.woff2') format('woff2');
+    }
+    
+  }
