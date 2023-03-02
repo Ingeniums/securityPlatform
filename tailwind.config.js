@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       fontFamily: {
         GameTh: ['GameofThrones'],
+        Roman:['RomanSD'],
     },
     colors: {
       color1:'#E78E08',
