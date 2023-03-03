@@ -43,8 +43,8 @@ function Platform() {
             <div className='flex sm:flex-row flex-col  mt-4 w-full '>
                 <div className='flex flex-col sm:justify-center justify-self-center  mx-auto w-4/5 sm:w-2/4 mt-10 sm:order-1 order-2'>
                { sortedKeys.map((team_name, i)=>(
-         <div className='flex flex-row justify-between items-center  bg-bgdiv gap-4  my-2 rounded-md h-16' key={i}>
-           <div className='flex w-1/5 px-6 text-white font-Roman '>{i+1}</div><div className='flex w-2/5 text-white font-Roman'>{team_name}</div><div className='flex w-2/5 justify-end mr-7 text-white font-Roman text-sm'>{formatTimer(timers[team_name])}</div>
+         <div className='flex flex-row justify-between items-center  bg-bgdiv gap-4 text-xl my-2 rounded-md h-16' key={i}>
+           <div className='flex w-1/5 px-6 text-white font-Roman '>{i+1}</div><div className='flex w-2/5 text-white font-Roman'>{team_name}</div><div className='flex w-2/5 justify-end mr-7 text-white font-Roman text-base'>{formatTimer(timers[team_name])}</div>
          </div> 
        ))}
                 </div>
