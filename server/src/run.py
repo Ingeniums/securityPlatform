@@ -5,7 +5,7 @@ from flask_socketio import SocketIO
 import os
 import time
 
-path = "../flag/flag.txt"
+path = "/flag/flag.txt"
 
 def get_team_name():
     with open(path, "r") as f:
