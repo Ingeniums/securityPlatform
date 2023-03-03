@@ -5,7 +5,7 @@ import Gameph2 from '../images/Kinginthenorth.png'
 
 const formatTimer = (m) => {
   const date = new Date(null);
-  date.setMilliseconds(m);
+  date.setSeconds(m);
 
   const minutes = date.getMinutes().toString().padStart(2, "0");
   const seconds = date.getSeconds().toString().padStart(2, "0");
@@ -17,17 +17,19 @@ const socket = io("ws://localhost:8000");
 
 function Platform() {
 
-  const [teamName, setTeamName] = useState('Invalid');
+  const [teamName, setTeamName] = useState(null);
   const [timers, setTimers] = useState({});
   const [sortedKeys, setSortedKeys] = useState([]);
 
   useEffect(() => {
+
     socket.on('data_update', (data) => {
-      setTeamName(data.is_valid_team ? data.team_name : "Invalid");
+      setTeamName(data.is_valid_team ? data.team_name : null);
       setTimers(data.timers);
       setSortedKeys(Object.keys(data.timers).sort((a, b) => data.timers[b] - data.timers[a]));
     });
-  }, []);
+
+  }, [timers]);
 
   return (
     <div className='flex flex-col sm:h-screen h-full'>
@@ -50,7 +52,7 @@ function Platform() {
                 </div>
                 <div className='flex flex-col w-1/3 mt-20  justify-self-center mx-auto  sm:mx-4 sm:justify-center sm:order-2 order-1 '>
                 <img src={Gameph2} className=' sm:w-6/12 sm:mx-auto'/>
-                <span className='flex  text-color1 md:text-6xl justify-center sm:mx-auto text-5xl   mt-6 font-Roman   '>{teamName}</span>
+                <span className='flex  text-color1 md:text-6xl justify-center sm:mx-auto text-5xl   mt-6 font-Roman   '>{teamName || 'Invalid'}</span>
 
                 </div>
                 
