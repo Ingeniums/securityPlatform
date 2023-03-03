@@ -37,7 +37,6 @@ function Platform() {
             </div>
             <div className='flex sm:w-3/4 w-full mt-5 flex-col justify-center' >
                 <span className=' flex font-Roman sm:justify-end justify-self-center lg:text-2xl md:text-xl sm:text-lg  text-base mx-auto md:mx-10 sm:mx-8 sm:my-7 text-white'> 0 Hours : 0 Minutes: 0 Secondes</span>
-                <span className='text-white flex  sm:justify-end  md:mx-10 sm:mx-8 text-xl justify-self-center mx-auto mt-3 '>www.givenwebsite.com</span>
             </div>
             </div>
             <div className='flex bg-white w-full h-1 shadow-md shadow-amber-600'></div>
