@@ -1,0 +1,36 @@
+version: '3.3'
+
+services:
+  client:
+    container_name: sober_client
+    image: sober/client:latest
+    build: ./client
+    ports:
+      - '3000:3000'
+  server:
+    container_name: sober_server
+    image: sober/server:latest
+    build: ./server
+    ports:
+      - '8000:8000'
+    volumes:
+      - flag-volume:/flag
+  target:
+    container_name: sober_target
+    image: sober/target:latest
+    build: ./target
+    ports:
+      - '1337:1337'
+      - '8080:8080'
+      - '2222:22'
+      - '2121:21'
+    volumes:
+      - flag-volume:/flag
+
+volumes:
+  flag-volume:
+    driver_opts:
+      type: none
+      device: ${PWD}/flag
+      o: bind
+
