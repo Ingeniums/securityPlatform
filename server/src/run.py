@@ -5,7 +5,10 @@ from flask_socketio import SocketIO
 import os
 import time
 
-path = "/flag/flag.txt"
+# path = "/flag/flag.txt"
+path = "../flag.txt"
+is_running = True
+time_left = 10
 
 def get_team_name():
     with open(path, "r") as f:
@@ -22,9 +25,12 @@ timers = {
 }
 
 def update_timer():
-    global socket
+    global socket, time_left
     while True:
         time.sleep(1)
+
+        if is_running and time_left > 0:
+            time_left -= 1
 
         if current_team_name in timers:
             timers[current_team_name] += 1
@@ -32,7 +38,8 @@ def update_timer():
         socket.emit('data_update', {
             "is_valid_team": current_team_name in timers,
             "team_name": current_team_name,
-            "timers": timers
+            "timers": timers,
+            "time_left": time_left
             })
 
 class ModifiedFlagHandler(FileSystemEventHandler):

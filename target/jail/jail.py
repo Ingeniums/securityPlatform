@@ -4,5 +4,7 @@ code = input(">> ")
 
 if " " in code:
     print("NO SPACES ALLOWED!!!!!!")
+elif "." in code:
+    print("NO DOTS ALLOWED!!!!!")
 else:
     exec(code)
