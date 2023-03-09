@@ -13,6 +13,16 @@ const formatTimer = (m) => {
   return `${minutes} Mins : ${seconds} Secs`;
 }
 
+const formatTimeLeft = (m) => {
+  const date = new Date(null);
+  date.setSeconds(m);
+
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  const seconds = date.getSeconds().toString().padStart(2, "0");
+
+  return `${minutes} Minutes : ${seconds} Seconds`;
+}
+
 const socket = io("ws://localhost:8000");
 
 function Platform() {
@@ -20,13 +30,21 @@ function Platform() {
   const [teamName, setTeamName] = useState(null);
   const [timers, setTimers] = useState({});
   const [sortedKeys, setSortedKeys] = useState([]);
+  const [timeLeft, setTimeLeft] = useState(0);
+  const [timeOver, setTimeOver] = useState(false);
 
   useEffect(() => {
 
     socket.on('data_update', (data) => {
       setTeamName(data.is_valid_team ? data.team_name : null);
       setTimers(data.timers);
+      setTimeLeft(data.time_left);
       setSortedKeys(Object.keys(data.timers).sort((a, b) => data.timers[b] - data.timers[a]));
+      if (data.time_left == 0)
+      {
+        setTimeOver(true);
+        socket.disconnect();
+      }
     });
 
   }, [timers]);
@@ -38,7 +56,7 @@ function Platform() {
                 <img src={Gameph} className=' w-full h-3/4 '/>
             </div>
             <div className='flex sm:w-3/4 w-full mt-5 flex-col justify-center' >
-                <span className=' flex font-Roman sm:justify-end justify-self-center lg:text-2xl md:text-xl sm:text-lg  text-base mx-auto md:mx-10 sm:mx-8 sm:my-7 text-white'> 0 Hours : 0 Minutes: 0 Secondes</span>
+                <span className=' flex font-Roman sm:justify-end justify-self-center lg:text-2xl md:text-xl sm:text-lg  text-base mx-auto md:mx-10 sm:mx-8 sm:my-7 text-white'>{formatTimeLeft(timeLeft)}</span>
             </div>
             </div>
             <div className='flex bg-white w-full h-1 shadow-md shadow-amber-600'></div>
