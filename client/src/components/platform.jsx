@@ -41,14 +41,14 @@ function Platform() {
       setTimers(data.timers);
       setTimeLeft(data.time_left);
       setSortedKeys(Object.keys(data.timers).sort((a, b) => data.timers[b] - data.timers[a]));
-      if (data.time_left == 0)
+      if (data.time_left === 0)
       {
         setTimeOver(true);
         socket.disconnect();
       }
     });
 
-  }, [timers]);
+  }, []);
 
   return (
     <div className='flex flex-col h-full sm:h-screen'>
@@ -80,16 +80,10 @@ function Platform() {
                <div className='flex flex-col  mt-20 justify-center '>
                 <img src={Over} className=' sm:w-2/5 mx-auto w-3/5' />
                 <img src={Gameph2} className='w-1/6 mx-auto mt-7'/>
-                <span className='flex  text-color1 md:text-6xl  justify-center sm:mx-auto text-5xl   mt-6 font-Roman   '>{teamName || 'Invalid'}</span>
+                <span className='flex  text-color1 md:text-6xl  justify-center sm:mx-auto text-5xl   mt-6 font-Roman   '>{sortedKeys[0]}</span>
 
                 </div>
               }
-
-            
-                
-
-            
-      
     </div>
   )
 }
