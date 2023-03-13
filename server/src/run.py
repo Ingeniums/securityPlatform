@@ -5,7 +5,7 @@ from flask_socketio import SocketIO
 import os
 import time
 
-path = "/flag/flag.txt"
+path = "/flag/king.txt"
 is_running = True
 time_left = 60*60
 
