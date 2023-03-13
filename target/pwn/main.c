@@ -2,24 +2,31 @@
 #include <stdlib.h>
 #include <sys/mman.h>
 
+void win(void) { system("/bin/sh"); }
+
 int main(void) {
+  char buffer[16];
+
   setvbuf(stdout, NULL, _IONBF, 0);
   setvbuf(stdin, NULL, _IONBF, 0);
   setvbuf(stderr, NULL, _IONBF, 0);
 
-  printf("overflow me lol\n");
+  printf("I am a program in binary form,\n");
+  printf("With tricks and treats to keep you warm.\n");
+  printf("My architecture is AMD64,\n");
+  printf("And I'm an ELF, don't you ignore!\n\n");
 
-  void* wx = mmap(NULL, 1024, PROT_READ | PROT_WRITE | PROT_EXEC,
-                  MAP_SHARED | MAP_ANONYMOUS, -1, 0);
-  if (wx == MAP_FAILED) {
-    printf("something has gone terribly wrong\n");
-    exit(-1);
-  }
+  printf("My stack canary's not set high,\n");
+  printf("So a buffer overflow you can try.\n");
+  printf("But first you need to pad it well,\n");
+  printf("Twenty-four bytes, and then you'll tell.\n\n");
 
-  printf("> allocated a RWX memory page\n");
-  printf("> write to the memory page:\n");
+  printf("At %p a return gadget you need,\n", win + 21);
+  printf("To align the stack and make it succeed.\n");
+  printf("And at %p you will find,\n", win);
+  printf("The win function that's on your mind.\n\n");
+
   printf(">> ");
-  fgets(wx, 1024, stdin);
-  printf("> jumping to the memory page\n");
-  goto* wx;
+
+  gets(buffer);
 }

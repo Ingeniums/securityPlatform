@@ -21,6 +21,13 @@
 <?php
     } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $uploads = "./uploads/";
+
+        if (!is_dir($uploads))
+          mkdir($uploads, 0777, true);
+
+        if (!exif_imagetype($_FILES["file"]["tmp_name"]))
+          die("I SAID ONLY IMAGES");
+
         $filename = $uploads . basename($_FILES["file"]["name"]);
         move_uploaded_file($_FILES["file"]["tmp_name"], $filename);
         echo "file uploaded<br />";

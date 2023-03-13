@@ -1,7 +1,6 @@
 #!/bin/bash
 
 /etc/init.d/ssh restart
-/etc/init.d/vsftpd restart
 
 php -S 0.0.0.0:8080 -t ./lfi &
 ./ynetd -a 0.0.0.0 -p 1337 -se y ./pwn/main &
